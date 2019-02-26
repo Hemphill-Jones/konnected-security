@@ -65,7 +65,7 @@ def updated() {
 def updateStates(states) {
   def temperature = new BigDecimal(states.temp)
   if (location.getTemperatureScale() == 'C') {
-  	temperature = temperature * 9 / 5 + 32
+  	temperature = temperature * 1.8 + 32
   }
   sendEvent(name: "temperature", value: temperature.setScale(1, BigDecimal.ROUND_HALF_UP), unit: location.getTemperatureScale())
 
