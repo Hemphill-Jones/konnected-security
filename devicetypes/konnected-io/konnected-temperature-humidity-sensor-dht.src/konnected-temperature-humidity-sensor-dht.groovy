@@ -29,7 +29,7 @@ metadata {
   tiles {
     multiAttributeTile(name:"main", type:"thermostat", width:6, height:4) {
         tileAttribute("device.temperature", key: "PRIMARY_CONTROL") {
-            attributeState "temperature", label:'${currentValue}°C', unit: "°C", backgroundColors: [
+            attributeState "temperature", label:'${currentValue}°C', unit: 'C', backgroundColors: [
                     // Celsius Color Range
                     [value:  0, color: "#153591"],
                     [value:  7, color: "#1E9CBB"],
@@ -64,8 +64,8 @@ def updated() {
 // Update state sent from parent app
 def updateStates(states) {
   def temperature = new BigDecimal(states.temp)
-  if (location.getTemperatureScale() == 'C') {
-  	temperature = temperature * 1.8 + 32
+  if (location.getTemperatureScale() == 'F') {
+  	temperature = temperature * 9 /5 + 32
   }
   sendEvent(name: "temperature", value: temperature.setScale(1, BigDecimal.ROUND_HALF_UP), unit: location.getTemperatureScale())
 
